@@ -63,7 +63,7 @@ public class AddUserMantisWebElementTest {
         assertEquals(driver.findElement(By.xpath("//tr[7]/td[@class='category']")).getText(), "Enabled");
         assertEquals(driver.findElement(By.xpath("//tr[8]/td[@class='category']")).getText(), "Protected");
 
-        //Fill user inforamtion
+        //Fill user information
         driver.findElement(By.id("user-username")).sendKeys("any name 1");
         driver.findElement(By.id("user-realname")).sendKeys("any real name 1");
         driver.findElement(By.id("email-field")).sendKeys("any@gmail.com");

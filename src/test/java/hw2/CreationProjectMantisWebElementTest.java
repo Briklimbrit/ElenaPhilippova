@@ -61,17 +61,15 @@ public class CreationProjectMantisWebElementTest {
         assertEquals(driver.findElement(By.xpath("//tr[4]/td[@class='category']")).getText(), "View Status");
         assertEquals(driver.findElement(By.xpath("//tr[5]/td[@class='category']")).getText(), "Description");
 
-        //Fill project inforamtion
+        //Fill project information
         driver.findElement(By.id("project-name")).sendKeys("any project3");
-
+        driver.findElement(By.className("lbl")).click();
+        driver.findElement(By.id("project-description")).sendKeys("any project description2");
         Select dropdown1 = new Select(driver.findElement(By.id("project-status")));
         dropdown1.selectByValue("10");
-
-        driver.findElement(By.className("lbl")).click();
         Select dropdown2 = new Select(driver.findElement(By.id("project-view-state")));
         dropdown2.selectByValue("10");
 
-        driver.findElement(By.id("project-description")).sendKeys("any project description2");
 
         //Click "Add Project" button
         driver.findElement(By.xpath("//input[@value='Add Project']")).click();
