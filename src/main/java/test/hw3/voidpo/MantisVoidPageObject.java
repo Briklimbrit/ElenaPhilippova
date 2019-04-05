@@ -6,14 +6,14 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class CreationProjectVoidPageObject {
+public class MantisVoidPageObject {
 
     private WebDriver driver;
     private WebElement username;
     private WebElement password;
     private WebElement someBtn;
 
-    public CreationProjectVoidPageObject(WebDriver driver){
+    public MantisVoidPageObject(WebDriver driver){
         this.driver = driver;
     }
 

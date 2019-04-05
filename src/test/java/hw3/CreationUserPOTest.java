@@ -1,4 +1,5 @@
 package hw3;
+
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -6,10 +7,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
-import static org.testng.Assert.assertEquals;
 import test.hw3.voidpo.MantisVoidPageObject;
 
-public class CreationProjectPOTest {
+import static org.testng.Assert.assertEquals;
+
+public class CreationUserPOTest {
+
 
     private WebDriver driver;
     private MantisVoidPageObject mvpo;
@@ -66,9 +69,9 @@ public class CreationProjectPOTest {
         // Check title
         assertEquals(mvpo.getPageTitle(), "Manage - MantisBT");
         //Click "Manage Projects" button at the main menu
-        mvpo.selectMenu("Manage Projects");
+        mvpo.selectMenu("Manage Users");
         // Check title
-        assertEquals(mvpo.getPageTitle(), "Manage Projects - MantisBT");
+        assertEquals(mvpo.getPageTitle(), "Manage Users - MantisBT");
     }
 
     @Test(priority = 4)
@@ -76,12 +79,12 @@ public class CreationProjectPOTest {
         //Operations before test
         mvpo.login("administrator", "root");
         mvpo.selectMenu("Manage");
-        mvpo.selectMenu("Manage Projects");
+        mvpo.selectMenu("Manage Users");
 
         // Check title
-        assertEquals(mvpo.getPageTitle(), "Manage Projects - MantisBT");
+        assertEquals(mvpo.getPageTitle(), "Manage Users - MantisBT");
         //Click "Create New Project" button
-        mvpo.selectTextBtn("button", "Create New Project");
+        mvpo.selectTextBtn("a", "Create New Account");
         // Check title
         assertEquals(mvpo.getPageTitle(), "MantisBT");
     }
@@ -91,33 +94,53 @@ public class CreationProjectPOTest {
         //Operations before test
         mvpo.login("administrator", "root");
         mvpo.selectMenu("Manage");
-        mvpo.selectMenu("Manage Projects");
-        mvpo.selectTextBtn("button", "Create New Project");
+        mvpo.selectMenu("Manage Users");
+        mvpo.selectTextBtn("a", "Create New Account");
 
         // Check title
         assertEquals(mvpo.getPageTitle(), "MantisBT");
 
-        //Check fields on the "Add Project" view
-        assertEquals(mvpo.checkField(1), "* Project Name");
-        assertEquals(mvpo.checkField(2), "Status");
-        assertEquals(mvpo.checkField(3), "Inherit Global Categories");
-        assertEquals(mvpo.checkField(4), "View Status");
-        assertEquals(mvpo.checkField(5), "Description");
+        //Check fields on the "Create New Account" view
+        assertEquals(mvpo.checkField(1), "Username");
+        assertEquals(mvpo.checkField(2), "Real Name");
+        assertEquals(mvpo.checkField(3), "E-mail");
+        assertEquals(mvpo.checkField(4), "Password");
+        assertEquals(mvpo.checkField(5), "Verify Password");
+        assertEquals(mvpo.checkField(6), "Access Level");
+        assertEquals(mvpo.checkField(7), "Enabled");
+        assertEquals(mvpo.checkField(8), "Protected");
 
-        //Fill project information
-        mvpo.addInformationByID("project-name", "any project4");
-        mvpo.addInformationByID("project-description", "any project description2");
-        mvpo.addInformationByXpath("project-status", "1");
-        mvpo.addInformationByXpath("project-view-state", "1");
-        mvpo.selectByClass("lbl");
+        //Fill user information
+        mvpo.addInformationByID("user-username", "any name 12");
+        mvpo.addInformationByID("user-realname", "any real name 1");
+        mvpo.addInformationByID("email-field", "any@gmail.com");
+        mvpo.addInformationByID("user-password", "elena");
+        mvpo.addInformationByID("user-verify-password", "elena");
+        mvpo.addInformationByXpath("user-access-level", "2");
 
-        mvpo.selectValueBtn("input", "Add Project");
+        mvpo.selectValueBtn("input", "Create User");
     }
 
     @Test(priority = 6)
     public void Logout(){
         //Operations before test
         mvpo.login("administrator", "root");
+
+        //Logout
+        mvpo.selectByClass("user-info");
+        mvpo.selectTextBtn("a", "Logout");
+    }
+
+    @Test(priority = 7)
+    public void loginAnotherUser(){
+        // Check title
+        assertEquals(mvpo.getPageTitle(), "MantisBT");
+
+        // Login
+        mvpo.login("any name 12", "elena");
+        
+        //Check login
+        assertEquals(mvpo.getUserName(), "any name 12");
 
         //Logout
         mvpo.selectByClass("user-info");

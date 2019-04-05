@@ -8,7 +8,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import static org.junit.Assert.assertEquals;
 
 
-public class AddUserMantisWebElementTest {
+public class CreationUserMantisWebElementTest {
 
     @Test
     public void addUser(){
@@ -38,8 +38,6 @@ public class AddUserMantisWebElementTest {
 
         //Check left side menu
         driver.findElement(By.id("sidebar"));
-
-        //Click "Manage" button at the left side menu
 
         //Click "Manage" button at the left side menu
         driver.findElement(By.partialLinkText("Manage")).click();
