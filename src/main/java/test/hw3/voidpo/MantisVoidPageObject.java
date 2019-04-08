@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
+// TODO Для каждой страницы должен быть определён свой PageObject
+// TODO Исправить в HW4
 public class MantisVoidPageObject {
 
     private WebDriver driver;
