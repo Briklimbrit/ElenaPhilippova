@@ -138,7 +138,7 @@ public class CreationUserPOTest {
 
         // Login
         mvpo.login("any name 12", "elena");
-        
+
         //Check login
         assertEquals(mvpo.getUserName(), "any name 12");
 
