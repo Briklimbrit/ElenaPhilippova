@@ -13,14 +13,15 @@ import test.hw4.voidpo.pageobjects.*;
 
 import static org.testng.Assert.assertEquals;
 
-public class CreationProjectPOTest {
+public class CreationUserPOTest {
 
     private WebDriver driver;
     private LoginPage lp;
     private AccountPage ap;
     private ManageOverviewPage mop;
-    private ManageProjPage mpp;
-    private ManageProjCreatePage mpcp;
+    private ManageUserPage mup;
+    private ManageUserCreatePage mucp;
+
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
@@ -39,8 +40,8 @@ public class CreationProjectPOTest {
         lp = new LoginPage(driver);
         ap = new AccountPage(driver);
         mop = new ManageOverviewPage(driver);
-        mpp = new ManageProjPage(driver);
-        mpcp = new ManageProjCreatePage(driver);
+        mup = new ManageUserPage(driver);
+        mucp = new ManageUserCreatePage(driver);
     }
 
     @Test(priority = 1)
@@ -81,24 +82,24 @@ public class CreationProjectPOTest {
         // Check title
         assertEquals(mop.getPageTitle(), "Manage - MantisBT");
         //Click "Manage Projects" button at the main menu
-        mop.selectMainMenu(ManageMenuItem.PROJECTS);
+        mop.selectMainMenu(ManageMenuItem.USERS);
         // Check title
-        assertEquals(mpp.getPageTitle(), "Manage Projects - MantisBT");
+        assertEquals(mup.getPageTitle(), "Manage Users - MantisBT");
     }
 
     @Test(priority = 4)
-    public void testPageFunction(){
+    public void testPageFunction() {
         //Operations before test
         lp.login("administrator", "root");
         ap.selectLeftMenu(LeftMenuItem.MANAGE);
-        mop.selectMainMenu(ManageMenuItem.PROJECTS);
+        mop.selectMainMenu(ManageMenuItem.USERS);
 
         // Check title
-        assertEquals(mpp.getPageTitle(), "Manage Projects - MantisBT");
+        assertEquals(mup.getPageTitle(), "Manage Users - MantisBT");
         //Click "Create New Project" button
-        mpp.clickCreateNewProjBtn();
+        mup.clickCreateNewUserBtn();
         // Check title
-        assertEquals(mpcp.getPageTitle(), "MantisBT");
+        assertEquals(mucp.getPageTitle(), "MantisBT");
     }
 
     @Test(priority = 5)
@@ -106,25 +107,42 @@ public class CreationProjectPOTest {
         //Operations before test
         lp.login("administrator", "root");
         ap.selectLeftMenu(LeftMenuItem.MANAGE);
-        mop.selectMainMenu(ManageMenuItem.PROJECTS);
-        mpp.clickCreateNewProjBtn();
+        mop.selectMainMenu(ManageMenuItem.USERS);
+        mup.clickCreateNewUserBtn();
 
         // Check title
-        assertEquals(mpcp.getPageTitle(), "MantisBT");
+        assertEquals(mucp.getPageTitle(), "MantisBT");
 
         //Fill project information
-        mpcp.addName("MyProject");
-        mpcp.addDesc("Some desc");
-        mpcp.addStatus("1");
-        mpcp.addViewStatus("1");
+        mucp.addUsername("mabe");
+        mucp.addRealname("so good");
+        mucp.addEmail("anymail@nail.ru");
+        mucp.addPassword("1234");
+        mucp.verifyPassword("1234");
+        mucp.setAccessLevel("2");
 
-       mpcp.clickAddProjBtn();
+        mucp.clickCreateUserBtn();
     }
 
     @Test(priority = 6)
     public void Logout(){
         //Operations before test
         lp.login("administrator", "root");
+
+        //Logout
+        ap.logout();
+    }
+
+    @Test(priority = 7)
+    public void loginAnotherUser(){
+        // Check title
+        assertEquals(lp.getPageTitle(), "MantisBT");
+
+        // Login
+        lp.login("maybe", "1234");
+
+        //Check login
+        assertEquals(ap.getUserName(), "maybe");
 
         //Logout
         ap.logout();
