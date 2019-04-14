@@ -79,8 +79,7 @@ public class IssuePOTest {
             // Check title
             assertEquals(vbp.getPageTitle(), "View Issues - MantisBT");
 
-            //Этот метод не работает из-за того, что я не могу выделить чекбокс
-            //vbp.setFilterDate();
+            vbp.setFilterDate();
             vbp.setPriority();
             vbp.setSeverity();
             vbp.setStatus();

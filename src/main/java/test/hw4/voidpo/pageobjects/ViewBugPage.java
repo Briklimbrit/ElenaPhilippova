@@ -2,6 +2,8 @@ package test.hw4.voidpo.pageobjects;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import test.hw4.voidpo.abstracts.AbstractPageObject;
 
 public class ViewBugPage extends AbstractPageObject {
@@ -22,11 +24,11 @@ public class ViewBugPage extends AbstractPageObject {
     private WebElement issuesNumber;
 
 
-    JavascriptExecutor js;
+    //JavascriptExecutor js;
 
     public ViewBugPage(WebDriver driver) {
         super(driver);
-        js = (JavascriptExecutor)driver;
+        //js = (JavascriptExecutor)driver;
     }
 
     private WebElement someBtn;
@@ -59,26 +61,27 @@ public class ViewBugPage extends AbstractPageObject {
     public void setFilterDate(){
         filterDate.click();
 
-        //someBtn.findElement(By.xpath("//span[@class='lbl padding-6 small']"));
-        js.executeScript("document.querySelector('#do_filter_by_date_filter_target > table > tbody > tr:nth-child(1) > td > label > span::before').click();");
+        new WebDriverWait(driver, 10).
+                until(ExpectedConditions.
+                        visibilityOf(driver.findElement(By.xpath("//span[contains(text(), 'Filter by Date Submitted')]")))).click();
 
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='start_year']")).click();
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='start_year']/option[1]")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_year']")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_year']/option[1]")).click();
 
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='start_month']")).click();
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='start_month']/option[3]")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_month']")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_month']/option[3]")).click();
 
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='start_day']")).click();
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='start_day']/option[27]")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_day']")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_day']/option[27]")).click();
 
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='end_year']")).click();
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='end_year']/option[1]")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_year']")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_year']/option[1]")).click();
 
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='end_month']")).click();
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='end_month']/option[4]")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_month']")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_month']/option[4]")).click();
 
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='end_day']")).click();
-        someBtn.findElement(By.xpath("//*[@class='input-xs' and @name='end_day']/option[20]")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_day']")).click();
+        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_day']/option[1]")).click();
 
     }
 
