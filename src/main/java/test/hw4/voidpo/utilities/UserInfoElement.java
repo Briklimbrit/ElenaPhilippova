@@ -13,6 +13,7 @@ public class UserInfoElement extends AbstractMainPageObject {
     @FindBy(className = "user-info")
     private WebElement userButton;
 
+    // TODO неоднозначный локатор
     @FindBy(xpath = "//ul/li[3]/ul//li")
     private List<WebElement> menuItems;
 

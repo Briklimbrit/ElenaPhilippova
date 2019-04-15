@@ -15,6 +15,7 @@ import static org.testng.Assert.assertEquals;
 
 public class CreationProjectPOTest {
 
+    // TODO Дубликат кода, можно вынести в базовый класс
     private WebDriver driver;
     private LoginPage lp;
     private AccountPage ap;
@@ -23,11 +24,13 @@ public class CreationProjectPOTest {
     private ManageProjCreatePage mpcp;
 
     @BeforeSuite(alwaysRun = true)
+    // TODO  базовый класс
     public void setUp() {
         ChromeDriverManager.chromedriver().version("73.0.3683.20").setup();
     }
 
     @BeforeMethod(alwaysRun = true)
+    // TODO  базовый класс
     public void initDriver() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -43,15 +46,19 @@ public class CreationProjectPOTest {
         mpcp = new ManageProjCreatePage(driver);
     }
 
+    // TODO Для каких целей используется приоритезация?
     @Test(priority = 1)
     public void loginMantisBt() {
         // Check title
+        // TODO hard-code
         assertEquals(lp.getPageTitle(), "MantisBT");
 
         // Login
+        // TODO пользователь должен быть в property файле
         lp.login("administrator", "root");
 
         // Check title
+        // TODO hard-code
         assertEquals(ap.getPageTitle(), "My Account - MantisBT");
     }
 
@@ -61,6 +68,7 @@ public class CreationProjectPOTest {
         lp.login("administrator", "root");
 
         // Check title
+        // TODO hard-code
         assertEquals(ap.getPageTitle(), "My Account - MantisBT");
 
         //Check login
@@ -69,6 +77,7 @@ public class CreationProjectPOTest {
         //Click "Manage" button at the left side menu
         ap.selectLeftMenu(LeftMenuItem.MANAGE);
         // Check title
+        // TODO hard-code
         assertEquals(mop.getPageTitle(), "Manage - MantisBT");
     }
 
@@ -79,10 +88,12 @@ public class CreationProjectPOTest {
         ap.selectLeftMenu(LeftMenuItem.MANAGE);
 
         // Check title
+        // TODO hard-code
         assertEquals(mop.getPageTitle(), "Manage - MantisBT");
         //Click "Manage Projects" button at the main menu
         mop.selectMainMenu(ManageMenuItem.PROJECTS);
         // Check title
+        // TODO hard-code
         assertEquals(mpp.getPageTitle(), "Manage Projects - MantisBT");
     }
 
@@ -94,6 +105,7 @@ public class CreationProjectPOTest {
         mop.selectMainMenu(ManageMenuItem.PROJECTS);
 
         // Check title
+        // TODO hard-code
         assertEquals(mpp.getPageTitle(), "Manage Projects - MantisBT");
         //Click "Create New Project" button
         mpp.clickCreateNewProjBtn();
@@ -110,6 +122,7 @@ public class CreationProjectPOTest {
         mpp.clickCreateNewProjBtn();
 
         // Check title
+        // TODO hard-code
         assertEquals(mpcp.getPageTitle(), "MantisBT");
 
         //Fill project information

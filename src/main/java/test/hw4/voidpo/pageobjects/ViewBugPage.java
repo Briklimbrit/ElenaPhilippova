@@ -45,22 +45,27 @@ public class ViewBugPage extends AbstractPageObject {
 
     public void setPriority(){
         priorityBtn.click();
+        // TODO Что такое 5?
         this.selectMenuByXpath("show_priority_filter_target", "5" );
     }
 
     public void setSeverity(){
         severityBtn.click();
+        // TODO Что такое 5?
         this.selectMenuByXpath("show_severity_filter_target", "5");
     }
 
     public void setStatus(){
         statusBtn.click();
+        // TODO Что такое 6?
         this.selectMenuByXpath("show_status_filter_target", "6");
     }
 
     public void setFilterDate(){
         filterDate.click();
 
+        // TODO Какие даты фильтруются?
+        // TODO Это может быть отдельный элемент?
         new WebDriverWait(driver, 10).
                 until(ExpectedConditions.
                         visibilityOf(driver.findElement(By.xpath("//span[contains(text(), 'Filter by Date Submitted')]")))).click();

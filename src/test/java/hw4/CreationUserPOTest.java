@@ -13,6 +13,7 @@ import test.hw4.voidpo.pageobjects.*;
 
 import static org.testng.Assert.assertEquals;
 
+// TODO Смотри комментарии в CreationProjectPOTest
 public class CreationUserPOTest {
 
     private WebDriver driver;

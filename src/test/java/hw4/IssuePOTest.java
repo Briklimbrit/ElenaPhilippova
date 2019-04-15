@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
 
+// TODO Смотри комментарии в CreationProjectPOTest
 public class IssuePOTest {
 
         private WebDriver driver;
