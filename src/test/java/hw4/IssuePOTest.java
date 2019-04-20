@@ -13,6 +13,7 @@ import test.hw4.voidpo.pageobjects.*;
 import java.util.concurrent.TimeUnit;
 
 import static org.testng.Assert.assertEquals;
+import static test.hw4.voidpo.enums.PageTitle.*;
 
 // TODO Смотри комментарии в CreationProjectPOTest
 public class IssuePOTest {
@@ -42,25 +43,16 @@ public class IssuePOTest {
             vbp = new ViewBugPage(driver);
         }
 
-        @Test(priority = 1)
-        public void loginMantisBt() {
+        @Test
+        public void FilterIssue() {
             // Check title
-            assertEquals(lp.getPageTitle(), "MantisBT");
+            assertEquals(lp.getPageTitle(), MANTIS_BT.getName());
 
             // Login
             lp.login("administrator", "root");
 
             // Check title
-            assertEquals(ap.getPageTitle(), "My Account - MantisBT");
-        }
-
-        @Test(priority = 2)
-        public void testSideBar() {
-            //Operations before test
-            lp.login("administrator", "root");
-
-            // Check title
-            assertEquals(ap.getPageTitle(), "My Account - MantisBT");
+            assertEquals(ap.getPageTitle(), MY_ACCOUNT.getName());
 
             //Check login
             assertEquals(ap.getUserName(), "administrator");
@@ -68,17 +60,7 @@ public class IssuePOTest {
             //Click "Manage" button at the left side menu
             ap.selectLeftMenu(LeftMenuItem.VIEW_ISSUES);
             // Check title
-            assertEquals(vbp.getPageTitle(), "View Issues - MantisBT");
-        }
-
-        @Test(priority = 3)
-        public void setFilterValues(){
-            //Operations before test
-            lp.login("administrator", "root");
-            ap.selectLeftMenu(LeftMenuItem.VIEW_ISSUES);
-
-            // Check title
-            assertEquals(vbp.getPageTitle(), "View Issues - MantisBT");
+            assertEquals(vbp.getPageTitle(), VIEW_ISSUES.getName());
 
             vbp.setFilterDate();
             vbp.setPriority();
@@ -88,12 +70,6 @@ public class IssuePOTest {
             vbp.clickApplyFilterBtn();
 
             assertEquals(vbp.getIssuesNumber(), "1 - 1 / 1");
-        }
-
-        @Test(priority = 4)
-        public void Logout(){
-            //Operations before test
-            lp.login("administrator", "root");
 
             //Logout
             ap.logout();

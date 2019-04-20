@@ -1,6 +1,8 @@
 package test.hw4.voidpo.abstracts;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import test.hw4.voidpo.utilities.LeftSideBarElement;
 import test.hw4.voidpo.utilities.MainMenuElement;
 import test.hw4.voidpo.utilities.UserInfoElement;
@@ -11,6 +13,9 @@ public abstract class AbstractPageObject extends AbstractMainPageObject {
 
     protected LeftSideBarElement leftSideBar;
     protected UserInfoElement userInfoElement;
+
+    @FindBy(xpath = "//*[(@class='grey') and not(@id='dropdown_projects_menu')]")
+    protected WebElement userBtn;
 
     protected AbstractPageObject(WebDriver driver) {
         super(driver);
@@ -23,6 +28,7 @@ public abstract class AbstractPageObject extends AbstractMainPageObject {
     }
 
     public void selectUserInfoMenu(UserInfoMenuItem item){
+        userBtn.click();
         userInfoElement.clickMenuItem(item);
     }
 

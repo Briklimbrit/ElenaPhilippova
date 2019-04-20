@@ -12,6 +12,7 @@ import test.hw4.voidpo.enums.ManageMenuItem;
 import test.hw4.voidpo.pageobjects.*;
 
 import static org.testng.Assert.assertEquals;
+import static test.hw4.voidpo.enums.PageTitle.*;
 
 public class CreationProjectPOTest {
 
@@ -47,11 +48,11 @@ public class CreationProjectPOTest {
     }
 
     // TODO Для каких целей используется приоритезация?
-    @Test(priority = 1)
-    public void loginMantisBt() {
+    @Test
+    public void CreationProject() {
         // Check title
         // TODO hard-code
-        assertEquals(lp.getPageTitle(), "MantisBT");
+        assertEquals(lp.getPageTitle(), MANTIS_BT.getName());
 
         // Login
         // TODO пользователь должен быть в property файле
@@ -59,17 +60,7 @@ public class CreationProjectPOTest {
 
         // Check title
         // TODO hard-code
-        assertEquals(ap.getPageTitle(), "My Account - MantisBT");
-    }
-
-    @Test(priority = 2)
-    public void testSideBar() {
-        //Operations before test
-        lp.login("administrator", "root");
-
-        // Check title
-        // TODO hard-code
-        assertEquals(ap.getPageTitle(), "My Account - MantisBT");
+        assertEquals(ap.getPageTitle(), MY_ACCOUNT.getName());
 
         //Check login
         assertEquals(ap.getUserName(), "administrator");
@@ -78,52 +69,18 @@ public class CreationProjectPOTest {
         ap.selectLeftMenu(LeftMenuItem.MANAGE);
         // Check title
         // TODO hard-code
-        assertEquals(mop.getPageTitle(), "Manage - MantisBT");
-    }
+        assertEquals(mop.getPageTitle(), MANAGE.getName());
 
-    @Test(priority = 3)
-    public void testMainMenu(){
-        //Operations before test
-        lp.login("administrator", "root");
-        ap.selectLeftMenu(LeftMenuItem.MANAGE);
-
-        // Check title
-        // TODO hard-code
-        assertEquals(mop.getPageTitle(), "Manage - MantisBT");
         //Click "Manage Projects" button at the main menu
         mop.selectMainMenu(ManageMenuItem.PROJECTS);
         // Check title
         // TODO hard-code
-        assertEquals(mpp.getPageTitle(), "Manage Projects - MantisBT");
-    }
+        assertEquals(mpp.getPageTitle(), MANAGE_PROJECTS.getName());
 
-    @Test(priority = 4)
-    public void testPageFunction(){
-        //Operations before test
-        lp.login("administrator", "root");
-        ap.selectLeftMenu(LeftMenuItem.MANAGE);
-        mop.selectMainMenu(ManageMenuItem.PROJECTS);
-
-        // Check title
-        // TODO hard-code
-        assertEquals(mpp.getPageTitle(), "Manage Projects - MantisBT");
         //Click "Create New Project" button
         mpp.clickCreateNewProjBtn();
         // Check title
-        assertEquals(mpcp.getPageTitle(), "MantisBT");
-    }
-
-    @Test(priority = 5)
-    public void fillProjectInformationTest(){
-        //Operations before test
-        lp.login("administrator", "root");
-        ap.selectLeftMenu(LeftMenuItem.MANAGE);
-        mop.selectMainMenu(ManageMenuItem.PROJECTS);
-        mpp.clickCreateNewProjBtn();
-
-        // Check title
-        // TODO hard-code
-        assertEquals(mpcp.getPageTitle(), "MantisBT");
+        assertEquals(mpcp.getPageTitle(), MANTIS_BT.getName());
 
         //Fill project information
         mpcp.addName("MyProject");
@@ -131,13 +88,7 @@ public class CreationProjectPOTest {
         mpcp.addStatus("1");
         mpcp.addViewStatus("1");
 
-       mpcp.clickAddProjBtn();
-    }
-
-    @Test(priority = 6)
-    public void Logout(){
-        //Operations before test
-        lp.login("administrator", "root");
+        mpcp.clickAddProjBtn();
 
         //Logout
         ap.logout();

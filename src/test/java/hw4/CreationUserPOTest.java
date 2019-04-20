@@ -12,6 +12,7 @@ import test.hw4.voidpo.enums.ManageMenuItem;
 import test.hw4.voidpo.pageobjects.*;
 
 import static org.testng.Assert.assertEquals;
+import static test.hw4.voidpo.enums.PageTitle.*;
 
 // TODO Смотри комментарии в CreationProjectPOTest
 public class CreationUserPOTest {
@@ -45,25 +46,16 @@ public class CreationUserPOTest {
         mucp = new ManageUserCreatePage(driver);
     }
 
-    @Test(priority = 1)
-    public void loginMantisBt() {
+    @Test
+    public void CreationUser() {
         // Check title
-        assertEquals(lp.getPageTitle(), "MantisBT");
+        assertEquals(lp.getPageTitle(), MANTIS_BT.getName());
 
         // Login
         lp.login("administrator", "root");
 
         // Check title
-        assertEquals(ap.getPageTitle(), "My Account - MantisBT");
-    }
-
-    @Test(priority = 2)
-    public void testSideBar() {
-        //Operations before test
-        lp.login("administrator", "root");
-
-        // Check title
-        assertEquals(ap.getPageTitle(), "My Account - MantisBT");
+        assertEquals(ap.getPageTitle(), MY_ACCOUNT.getName());
 
         //Check login
         assertEquals(ap.getUserName(), "administrator");
@@ -71,51 +63,20 @@ public class CreationUserPOTest {
         //Click "Manage" button at the left side menu
         ap.selectLeftMenu(LeftMenuItem.MANAGE);
         // Check title
-        assertEquals(mop.getPageTitle(), "Manage - MantisBT");
-    }
+        assertEquals(mop.getPageTitle(), MANAGE.getName());
 
-    @Test(priority = 3)
-    public void testMainMenu(){
-        //Operations before test
-        lp.login("administrator", "root");
-        ap.selectLeftMenu(LeftMenuItem.MANAGE);
-
-        // Check title
-        assertEquals(mop.getPageTitle(), "Manage - MantisBT");
         //Click "Manage Projects" button at the main menu
         mop.selectMainMenu(ManageMenuItem.USERS);
         // Check title
-        assertEquals(mup.getPageTitle(), "Manage Users - MantisBT");
-    }
+        assertEquals(mup.getPageTitle(), MANAGE_USERS.getName());
 
-    @Test(priority = 4)
-    public void testPageFunction() {
-        //Operations before test
-        lp.login("administrator", "root");
-        ap.selectLeftMenu(LeftMenuItem.MANAGE);
-        mop.selectMainMenu(ManageMenuItem.USERS);
-
-        // Check title
-        assertEquals(mup.getPageTitle(), "Manage Users - MantisBT");
         //Click "Create New Project" button
         mup.clickCreateNewUserBtn();
         // Check title
-        assertEquals(mucp.getPageTitle(), "MantisBT");
-    }
-
-    @Test(priority = 5)
-    public void fillProjectInformationTest(){
-        //Operations before test
-        lp.login("administrator", "root");
-        ap.selectLeftMenu(LeftMenuItem.MANAGE);
-        mop.selectMainMenu(ManageMenuItem.USERS);
-        mup.clickCreateNewUserBtn();
-
-        // Check title
-        assertEquals(mucp.getPageTitle(), "MantisBT");
+        assertEquals(mucp.getPageTitle(), MANTIS_BT.getName());
 
         //Fill project information
-        mucp.addUsername("mabe");
+        mucp.addUsername("EL");
         mucp.addRealname("so good");
         mucp.addEmail("anymail@nail.ru");
         mucp.addPassword("1234");
@@ -123,27 +84,19 @@ public class CreationUserPOTest {
         mucp.setAccessLevel("2");
 
         mucp.clickCreateUserBtn();
-    }
 
-    @Test(priority = 6)
-    public void Logout(){
-        //Operations before test
-        lp.login("administrator", "root");
+
+        // Check title
+        assertEquals(lp.getPageTitle(), MANTIS_BT.getName());
 
         //Logout
         ap.logout();
-    }
-
-    @Test(priority = 7)
-    public void loginAnotherUser(){
-        // Check title
-        assertEquals(lp.getPageTitle(), "MantisBT");
 
         // Login
-        lp.login("maybe", "1234");
+        lp.login("EL", "1234");
 
         //Check login
-        assertEquals(ap.getUserName(), "maybe");
+        assertEquals(ap.getUserName(), "EL");
 
         //Logout
         ap.logout();

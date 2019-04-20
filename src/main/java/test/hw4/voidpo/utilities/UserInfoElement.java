@@ -14,7 +14,8 @@ public class UserInfoElement extends AbstractMainPageObject {
     private WebElement userButton;
 
     // TODO неоднозначный локатор
-    @FindBy(xpath = "//ul/li[3]/ul//li")
+    //DONE
+    @FindBy(xpath = "//ul[contains(@class, 'user-menu')]/li")
     private List<WebElement> menuItems;
 
     public UserInfoElement(WebDriver driver) {

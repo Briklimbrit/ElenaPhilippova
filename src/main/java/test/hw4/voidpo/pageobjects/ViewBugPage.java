@@ -5,6 +5,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import test.hw4.voidpo.abstracts.AbstractPageObject;
+import test.hw4.voidpo.enums.PriorityOption;
+import test.hw4.voidpo.enums.SeverityOption;
+import test.hw4.voidpo.enums.StatusOption;
+import test.hw4.voidpo.utilities.CalendarElement;
 
 public class ViewBugPage extends AbstractPageObject {
 
@@ -23,12 +27,10 @@ public class ViewBugPage extends AbstractPageObject {
     @FindBy(className = "badge")
     private WebElement issuesNumber;
 
-
-    //JavascriptExecutor js;
+    private CalendarElement calendarElement;
 
     public ViewBugPage(WebDriver driver) {
         super(driver);
-        //js = (JavascriptExecutor)driver;
     }
 
     private WebElement someBtn;
@@ -46,19 +48,22 @@ public class ViewBugPage extends AbstractPageObject {
     public void setPriority(){
         priorityBtn.click();
         // TODO Что такое 5?
-        this.selectMenuByXpath("show_priority_filter_target", "5" );
+        //DONE
+        this.selectMenuByXpath("show_priority_filter_target", PriorityOption.HIGH.getOptionNumber());
     }
 
     public void setSeverity(){
         severityBtn.click();
         // TODO Что такое 5?
-        this.selectMenuByXpath("show_severity_filter_target", "5");
+        //DONE
+        this.selectMenuByXpath("show_severity_filter_target", SeverityOption.TWEAK.getOptionNumber());
     }
 
     public void setStatus(){
         statusBtn.click();
         // TODO Что такое 6?
-        this.selectMenuByXpath("show_status_filter_target", "6");
+        //DONE
+        this.selectMenuByXpath("show_status_filter_target", StatusOption.ASSIGNED.getOptionNumber());
     }
 
     public void setFilterDate(){
@@ -66,28 +71,11 @@ public class ViewBugPage extends AbstractPageObject {
 
         // TODO Какие даты фильтруются?
         // TODO Это может быть отдельный элемент?
-        new WebDriverWait(driver, 10).
-                until(ExpectedConditions.
-                        visibilityOf(driver.findElement(By.xpath("//span[contains(text(), 'Filter by Date Submitted')]")))).click();
+        //DONE
 
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_year']")).click();
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_year']/option[1]")).click();
-
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_month']")).click();
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_month']/option[3]")).click();
-
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_day']")).click();
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='start_day']/option[27]")).click();
-
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_year']")).click();
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_year']/option[1]")).click();
-
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_month']")).click();
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_month']/option[4]")).click();
-
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_day']")).click();
-        driver.findElement(By.xpath("//*[@class='input-xs' and @name='end_day']/option[1]")).click();
-
+        calendarElement = new CalendarElement(driver, "2019", "March", "27",
+                "2019", "April", "15");
+        calendarElement.setFilterDate();
     }
 
     public void clickApplyFilterBtn(){
